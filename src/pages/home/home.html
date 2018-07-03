@@ -1,19 +1,24 @@
 <ion-header>
-    <ion-navbar color="danger">
-      <button ion-button menuToggle>
-        <ion-icon name="menu"></ion-icon>
-      </button>
-      <ion-title> List รายการขอความช่วยเหลือ</ion-title>
-    </ion-navbar>
-  </ion-header>
-  
+  <ion-navbar color="danger">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title> List รายการขอความช่วยเหลือ</ion-title>
+  </ion-navbar>
+</ion-header>
 
-<ion-content padding>
+
+<ion-content>
 
   <ion-card>
     <ion-card-header>
       <img [src]=" item?.image ">
     </ion-card-header>
+
+      <ion-item>
+        <ion-label>Status : {{ status }}</ion-label>
+        <ion-toggle  [(ngModel)]="statusToggle" (ngModelChange)="updateStatus($event)"></ion-toggle>
+      </ion-item>
 
     <ion-list>
       <button ion-item>
@@ -54,6 +59,7 @@
       <ion-label color="primary" floating>กรอก ID ทีม</ion-label>
       <ion-input type="text" [(ngModel)]="key_team_number_ambulance"></ion-input>
     </ion-item>
-    <button ion-button color="light" (click) = "onSubmit()" >ยืนยัน</button>
+    <button ion-button color="light" (click)="onSubmit()">ยืนยัน</button>
+    <!-- <button ion-button color="light" (click) = "onLoadKey()" >load</button> -->
   </ion-list>
 </ion-content>

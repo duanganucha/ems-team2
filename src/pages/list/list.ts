@@ -14,9 +14,9 @@ import { DispatchClass } from '../../app/interface'
   templateUrl: 'list.html'
 })
 export class ListPage {
-  
-  items: Observable<DispatchClass[]> ; 
-  itemsRef : AngularFireList<any>;
+
+  items: Observable<DispatchClass[]>;
+  itemsRef: AngularFireList<any>;
 
   constructor(
     public afDB: AngularFireDatabase,
@@ -26,21 +26,16 @@ export class ListPage {
     const loader = this.loadingCtrl.create({
       content: 'กำลังโหลดข้อมูล...',
     });
-   
+    loader.present();
     this.itemsRef = afDB.list('requests');
     this.items = this.itemsRef.snapshotChanges().map(changes => {
       return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
     });
-
-     this.items.subscribe(snapshots => {
-      loader.dismiss();
-    },(err) => {console.warn(err);}
-    )
-
+    loader.dismiss();
   }
 
-  onDetailView(item){
-    this.navCtrl.push(DetailPage,{item})
+  onDetailView(item) {
+    this.navCtrl.push(DetailPage, { item })
   }
 
 }

@@ -24,6 +24,7 @@ import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-na
 import { VitalsignPage } from '../pages/vitalsign/vitalsign';
 
 import { ReactiveFormsModule } from '@angular/forms';
+import { IonicStorageModule } from '@ionic/storage';
 
 
 @NgModule({
@@ -44,6 +45,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCF3aH2Bk1v1-AOIaeDWFXzfsNjK0dh558'
     }),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
