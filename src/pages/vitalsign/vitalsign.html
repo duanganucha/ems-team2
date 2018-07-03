@@ -1,0 +1,210 @@
+
+<ion-header>
+
+  <ion-navbar color="danger">
+    <ion-title>vitalsign</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <ion-toolbar>
+    <ion-segment [(ngModel)]="segment" color="danger" (ionChange)="segmentChanged($event)">
+      <ion-segment-button value="first">
+        <ion-icon></ion-icon>first
+      </ion-segment-button>
+      <ion-segment-button value="second">
+        <ion-icon></ion-icon>second
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+
+  <!-- -----------Form1--------------- -->
+  <form [formGroup]="formVitalSign" (ngSubmit)="onSendVitalSign()">
+    <ion-list *ngIf="segment === 'first'" >
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label color="primary" stacked>GCS score </ion-label>
+              <ion-input type="text" formControlName="vitalsign1_GSC" placeholder="EVM score"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label color="primary" stacked>Pupils R/L</ion-label>
+              <ion-input type="text" formControlName="vitalsign1_pupil" placeholder="Pupils"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label color="primary" stacked>BP_Diatolic</ion-label>
+              <ion-input type="number" formControlName="vitalsign1_BP_Diastolic" placeholder="Diatolic"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label color="primary" stacked>BP_Systolic</ion-label>
+              <ion-input type="number" formControlName="vitalsign1_BP_Systolic" placeholder="Systolic"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label color="primary" stacked>Pulse</ion-label>
+              <ion-input type="number" formControlName="vitalsign1_pulse" placeholder="pulse"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label color="primary" stacked>RR</ion-label>
+              <ion-input type="number" formControlName="vitalsign1_RR" placeholder="RR"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label color="primary" stacked>อาการ / เพิ่มเติม</ion-label>
+              <ion-textarea type="text" formControlName="vitalsign1_symptom_first" placeholder="อาการ / เพิ่มเติม "></ion-textarea>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label color="primary" stacked>DTX</ion-label>
+              <ion-input type="number" formControlName="vitalsign1_DTX" placeholder="DTX"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <button ion-button type="submit" round>ส่งข้อมูล</button>
+    </ion-list>
+    <!-- -----------Form1---END------------ -->
+    <!-- -----------Form2--------------- -->
+    <ion-list *ngIf="segment == 'second'" >
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label color="primary" stacked>GCS2 score </ion-label>
+              <ion-input type="text" formControlName="vitalsign2_GSC" placeholder="EVM score"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label color="primary" stacked>Pupils R/L</ion-label>
+              <ion-input type="text" formControlName="vitalsign2_pupil" placeholder="Pupils"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label color="primary" stacked>BP_Diatolic</ion-label>
+              <ion-input type="number" formControlName="vitalsign2_BP_Diastolic" placeholder="Diatolic"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label color="primary" stacked>BP_Systolic</ion-label>
+              <ion-input type="number" formControlName="vitalsign2_BP_Systolic" placeholder="Systolic"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label color="primary" stacked>Pulse</ion-label>
+              <ion-input type="number" formControlName="vitalsign2_pulse" placeholder="pulse"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label color="primary" stacked>RR</ion-label>
+              <ion-input type="number" formControlName="vitalsign2_RR" placeholder="RR"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label color="primary" stacked>อาการ / เพิ่มเติม</ion-label>
+              <ion-textarea type="text" formControlName="vitalsign2_symptom_second" placeholder="อาการ / เพิ่มเติม "></ion-textarea>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label color="primary" stacked>DTX</ion-label>
+              <ion-input type="number" formControlName="vitalsign2_DTX" placeholder="DTX"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <button ion-button type="submit" round>ส่งข้อมูล</button>
+    </ion-list>
+    <!-- -----------Form2---END------------ -->
+  </form>
+
+
+
+
+
+  <form [formGroup]="todo" (ngSubmit)="logForm()">
+    <ion-item>
+      <ion-label>Todo</ion-label>
+      <ion-input type="text" formControlName="title"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Description</ion-label>
+      <ion-textarea formControlName="description"></ion-textarea>
+    </ion-item>
+
+    <ion-segment formControlName="mapStyle" color="danger">
+      <ion-segment-button value="standard">
+        Standard
+      </ion-segment-button>
+      <ion-segment-button value="hybrid">
+        Hybrid
+      </ion-segment-button>
+      <ion-segment-button value="sat">
+        Satellite
+      </ion-segment-button>
+    </ion-segment>
+
+    <ion-item>
+      <ion-label>ON/Off</ion-label>
+      <ion-toggle formControlName="notify" [(ngModel)]="notify" (ngModelChange)="update($event)"></ion-toggle>
+    </ion-item>
+
+    <button ion-button type="submit" [disabled]="!todo.valid">Submit</button>
+  </form>
+
+  <ion-item>
+    <ion-label>ON/Off</ion-label>
+    <ion-toggle (ionChange)="update($event)"></ion-toggle>
+  </ion-item>
+
+
+
+</ion-content>

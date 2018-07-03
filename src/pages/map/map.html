@@ -1,0 +1,31 @@
+<ion-header>
+
+    <ion-navbar color="danger">
+      <ion-title>map</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  <ion-content >
+  
+      <agm-map 
+      [latitude]="item.report_location.lat" 
+      [longitude]="item.report_location.lng"
+      mapTypeControl="true"
+      zoomControl="true"
+      scaleControl="true"
+      [fullscreenControl]="true"
+      [fullscreenControlOptions]="screenOptions" [zoom]="17"
+      >
+        <agm-marker 
+            [latitude]="item.report_location.lat" 
+            [longitude]="item.report_location.lng" 
+            [iconUrl]="'assets/imgs/location.png'">
+          </agm-marker>
+      </agm-map>
+  
+      <ion-fab right top>
+          <button ion-fab color="primary"><ion-icon name="ios-navigate-outline" (click)="openNavigator()"></ion-icon></button>
+        </ion-fab>
+  
+  </ion-content>

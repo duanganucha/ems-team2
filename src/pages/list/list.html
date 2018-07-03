@@ -1,23 +1,28 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="danger">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>List</ion-title>
+    <ion-title> List รายการขอความช่วยเหลือ</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+
+<ion-content >
+
   <ion-list>
-    <button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">
-      <ion-icon [name]="item.icon" item-start></ion-icon>
-      {{item.title}}
-      <div class="item-note" item-end>
-        {{item.note}}
-      </div>
-    </button>
-  </ion-list>
-  <div *ngIf="selectedItem" padding>
-    You navigated here from <b>{{selectedItem.title}}</b>
-  </div>
+      <ion-item  *ngFor="let item of items | async"  (click)="onDetailView(item)">
+        <ion-thumbnail item-start>
+            <img src="{{item.report_image}}">
+          </ion-thumbnail>
+          <h2>{{ item.report_scene }}</h2>
+          <h4>{{ item.report_locationDetail }}</h4>
+          <p>{{ item.report_time | date: 'dd/MM/yyyy - HH:mm' }}</p>
+          
+          <button ion-button clear item-end >
+              <ion-icon name="ios-arrow-forward"></ion-icon>
+          </button>
+      </ion-item>
+    </ion-list>
+
 </ion-content>
