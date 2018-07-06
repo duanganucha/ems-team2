@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { CallNumber } from '@ionic-native/call-number';
 import { MapPage } from '../map/map';
 import { VitalsignPage } from '../vitalsign/vitalsign';
+import { StatusPage } from '../status/status';
 
 
 @IonicPage()
@@ -34,6 +35,11 @@ export class DetailPage {
 
   openVitalSign(item){
     this.navCtrl.push(VitalsignPage, {item})
+  }
+
+  openStatusPage(item){
+    console.log(item)
+    this.navCtrl.push(StatusPage, {item})
   }
 
 }

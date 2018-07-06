@@ -4,6 +4,8 @@ import { IonicPage, NavController, NavParams, LoadingController, ToastController
 
 import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator';
 import { Geolocation } from '@ionic-native/geolocation';
+import { VitalsignPage } from '../vitalsign/vitalsign';
+import { StatusPage } from '../status/status';
 
 
 @IonicPage()
@@ -68,9 +70,17 @@ export class MapPage {
       let toast = this.toastCtrl.create({
         message: `สถานที่เกิดเหตุ : ${this.item.report_locationDetail}`,
         showCloseButton: true,
-        closeButtonText: 'ปิด'
+        closeButtonText: 'ปิด',
+        duration: 4000
+
       });
       toast.present();
     }
 
+    openVitalSign(item){
+      this.navCtrl.push(VitalsignPage, {item})
+    }
+    openStatusPage(item){
+      this.navCtrl.push(StatusPage, {item})
+    }
 }

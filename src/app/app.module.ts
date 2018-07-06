@@ -25,6 +25,7 @@ import { VitalsignPage } from '../pages/vitalsign/vitalsign';
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { IonicStorageModule } from '@ionic/storage';
+import { StatusPage } from '../pages/status/status';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { IonicStorageModule } from '@ionic/storage';
     ListPage,
     DetailPage,
     MapPage,
-    VitalsignPage
+    VitalsignPage,
+    StatusPage
   ],
   imports: [
     BrowserModule,ReactiveFormsModule,
@@ -54,7 +56,8 @@ import { IonicStorageModule } from '@ionic/storage';
     ListPage,
     DetailPage,
     MapPage,
-    VitalsignPage
+    VitalsignPage,
+    StatusPage
   ],
   providers: [
     StatusBar,

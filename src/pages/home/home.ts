@@ -5,6 +5,9 @@ import 'rxjs/Rx'
 import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 
 import { Storage } from '@ionic/storage';
+import { Observable } from 'rxjs/Rx';
+import { Geolocation } from '@ionic-native/geolocation';
+import { Location } from '../../app/location';
 
 @Component({
   selector: 'page-home',
@@ -21,12 +24,39 @@ export class HomePage {
   constructor(
     public afDB: AngularFireDatabase,
     public loadingCtrl: LoadingController,
-    private storage: Storage
+    private storage: Storage,
+    private geolocation: Geolocation
+
   ) {
 
     this.onLoadKey();
     this.getData();
 
+  }
+
+  location : Location =  {
+      lat : null,
+      lng : null
+  }
+
+  ngOnInit(): void {
+    Observable.interval(5000)
+      .subscribe(i => {
+        console.log("count : " + i)
+        this.geolocation.getCurrentPosition().then((resp) => {
+          this.location.lat  = resp.coords.latitude
+          this.location.lng  = resp.coords.longitude
+          // this.location.lng = resp.coords.longitude
+
+          console.log(this.location);
+
+          const itemsRef = this.afDB.list('teams');
+          itemsRef.update(this.id, { location: this.location });
+
+        }).catch((error) => {
+          console.log('Error getting location', error);
+        });
+      })
   }
 
   getData() {
@@ -77,30 +107,20 @@ export class HomePage {
 
   }
 
-  statusToggle : boolean;
+  statusToggle: boolean;
   status = '...';
 
-  updateStatus(event){
+  updateStatus(event) {
     this.statusToggle = event;
-    if(this.statusToggle == true ){
-      console.log(this.statusToggle)
+    if (this.statusToggle == true) {
       const itemsRef = this.afDB.list('teams');
-      itemsRef.update( this.id , { status :'isReady'} );
-    }else{
-      console.log(this.statusToggle)
-
+      itemsRef.update(this.id, { status: 'isReady' });
+    } else {
       const itemsRef = this.afDB.list('teams');
-      itemsRef.update( this.id ,{ status : 'UnReady' } );
+      itemsRef.update(this.id, { status: 'UnReady' });
     }
     this.getData()
-    // this.statusToggle = event;
-    // if(this.statusToggle == true ){
-    //   this.status = "พร้อม"
-    // }else{
-    //   this.status = "ไม่พร้อม"
-    // }
+
   }
 
 }
-
-

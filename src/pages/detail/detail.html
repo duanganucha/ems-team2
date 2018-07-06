@@ -1,50 +1,56 @@
 <ion-header>
 
-    <ion-navbar color="danger">
-      <ion-title>รายละเอียด</ion-title>
-      
-      <ion-buttons end>
-        <button ion-button icon-only (click)="openVitalSign(item)">
-          <ion-icon name="heart"></ion-icon>
-        </button>
-      </ion-buttons>
-    </ion-navbar>
+  <ion-navbar color="danger">
+    <ion-title>รายละเอียด</ion-title>
 
-  </ion-header>
-  
-  
-  <ion-content padding>
-    <img src="{{item.report_image}}" class="center">
+    <ion-buttons end>
+      <button ion-button icon-only (click)="openVitalSign(item)">
+        <ion-icon name="heart"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
 
-  
-    <ion-list>
-        <ion-item>
-            <ion-icon name="ios-timer-outline" item-start></ion-icon>
-          <p>เวลารับเหตุ : {{ item.report_time | date: 'dd/MM/yyyy - HH:mm' }}</p>
-        </ion-item>
-        
-      <ion-item>
-        <ion-icon name="ios-body" item-start></ion-icon>
-        {{ item.report_scene }}
-      </ion-item>
-  
-      <ion-item (click)="onCallPhone()">
-        <ion-icon name="md-phone-portrait" item-start></ion-icon>
-        {{ item.report_telNumber }}
-        <ion-icon name="md-call" item-end></ion-icon>
-      </ion-item>
-  
-      <ion-item (click)="openMap()">
-        <ion-icon name="md-map" item-start></ion-icon>
-        สถานที่เกิดเหตุ
-        <ion-icon name="ios-navigate" item-end></ion-icon>
-      </ion-item>
-    </ion-list>
-    <ion-list>
-      <p>
-        {{ item.report_locationDetail }}
-      </p>
-    </ion-list>
-    
-  
-  </ion-content>
+</ion-header>
+
+
+<ion-content padding>
+  <img src="{{item?.report_image}}" class="center">
+
+
+  <ion-list>
+    <ion-item>
+      <ion-icon name="ios-timer-outline" item-start></ion-icon>
+      <p>เวลารับเหตุ : {{ item?.report_time | date: 'dd/MM/yyyy - HH:mm' }}</p>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="ios-body" item-start></ion-icon>
+      {{ item?.report_scene }}
+    </ion-item>
+
+    <ion-item (click)="onCallPhone()">
+      <ion-icon name="md-phone-portrait" item-start></ion-icon>
+      {{ item?.report_telNumber }}
+      <ion-icon name="md-call" item-end></ion-icon>
+    </ion-item>
+
+    <ion-item (click)="openMap()">
+      <ion-icon name="md-map" item-start></ion-icon>
+      สถานที่เกิดเหตุ
+      <ion-icon name="ios-navigate" item-end></ion-icon>
+    </ion-item>
+  </ion-list>
+  <ion-list>
+    <p>
+      {{ item?.report_locationDetail }}
+    </p>
+  </ion-list>
+
+  <ion-fab right bottom >
+    <button ion-fab color="primary" (click)="openStatusPage(item)">
+      <ion-icon name="ios-speedometer" ></ion-icon>
+    </button>
+  </ion-fab>
+
+
+</ion-content>

@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { DispatchClass } from '../../app/interface';
 import { AngularFireDatabase } from 'angularfire2/database';
+import { ListPage } from '../list/list';
 
 /**
  * Generated class for the VitalsignPage page.
@@ -19,7 +20,7 @@ import { AngularFireDatabase } from 'angularfire2/database';
 export class VitalsignPage {
   segment ;
   item : DispatchClass;
-  private todo : FormGroup;
+  // private todo : FormGroup;
   private formVitalSign : FormGroup;
 
   constructor(public navCtrl: NavController, 
@@ -54,19 +55,22 @@ export class VitalsignPage {
       vitalsign2_DTX : [this.item.vitalsign2_DTX]
     })
 
-    this.todo = this.builder.group({
-      title: ['', Validators.required],
-      description: [''],
-      mapStyle : '',
-      notify : ''
-    });
+    // this.todo = this.builder.group({
+    //   title: ['', Validators.required],
+    //   description: [''],
+    //   mapStyle : '',
+    //   notify : ''
+    // });
   }
 
   onSendVitalSign(){
+    console.log(this.formVitalSign.value)
+
     const itemsRef = this.afDB.list('requests');
     itemsRef.update( this.item.key , this.formVitalSign.value );
 
-    console.log(this.formVitalSign.value)
+
+    this.navCtrl.setRoot(ListPage);
   }
   segmentChanged(event){
     console.log(event)
@@ -74,15 +78,9 @@ export class VitalsignPage {
   }
 
 
-  logForm(){
-    console.log(this.todo.value)
-  }
+  // logForm(){
+  //   console.log(this.todo.value)
+  // }
 
-
-  notify = false ;
-  update(event){
-    this.notify = event
-    console.log(this.notify)
-  }
 
 }

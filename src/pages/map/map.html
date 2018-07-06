@@ -1,7 +1,14 @@
 <ion-header>
 
     <ion-navbar color="danger">
-      <ion-title>map</ion-title>
+      <ion-title>Map Location</ion-title>
+
+      <ion-buttons end>
+          <button ion-button icon-only (click)="openVitalSign(item)">
+            <ion-icon name="heart"></ion-icon>
+          </button>
+        </ion-buttons>
+
     </ion-navbar>
   
   </ion-header>
@@ -25,7 +32,13 @@
       </agm-map>
   
       <ion-fab right top>
-          <button ion-fab color="primary"><ion-icon name="ios-navigate-outline" (click)="openNavigator()"></ion-icon></button>
+          <button ion-fab color="secondary"><ion-icon name="ios-navigate-outline" (click)="openNavigator()"></ion-icon></button>
         </ion-fab>
-  
+        
+        <ion-fab right bottom >
+            <button ion-fab color="primary"  (click)="openStatusPage(item)">
+              <ion-icon name="ios-speedometer" ></ion-icon>
+            </button>
+          </ion-fab>
+
   </ion-content>
