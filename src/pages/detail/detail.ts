@@ -4,6 +4,7 @@ import { CallNumber } from '@ionic-native/call-number';
 import { MapPage } from '../map/map';
 import { VitalsignPage } from '../vitalsign/vitalsign';
 import { StatusPage } from '../status/status';
+import { AngularFireObject, AngularFireDatabase } from '../../../node_modules/angularfire2/database';
 
 
 @IonicPage()
@@ -12,15 +13,31 @@ import { StatusPage } from '../status/status';
   templateUrl: 'detail.html',
 })
 export class DetailPage {
-
+  itemRef: AngularFireObject<any>;
+  key;
   item;
   constructor(
     private callNumber: CallNumber,
     public navCtrl: NavController, 
-    public navParams: NavParams) {
-     this.item = this.navParams.get('item');
-      console.log(this.item)
+    public navParams: NavParams,
+    public afDB : AngularFireDatabase
+  ) 
+    {
+     this.key = this.navParams.get('item');
+     this.key = this.key.key
+     this.getData()
   }
+
+  getData() {
+    this.itemRef = this.afDB.object(`requests/${this.key}`);
+    this.itemRef.snapshotChanges().subscribe(action => {
+      this.item = action.payload.val();
+      this.item.key = action.key
+      console.log(this.item)
+    });
+
+  }
+  
 
   openMap(){
     console.log(this.item)

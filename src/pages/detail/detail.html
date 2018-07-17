@@ -38,11 +38,24 @@
       <ion-icon name="md-map" item-start></ion-icon>
       สถานที่เกิดเหตุ
       <ion-icon name="ios-navigate" item-end></ion-icon>
+      <p>
+        {{ item?.report_locationDetail }}
+      </p>
     </ion-item>
-  </ion-list>
-  <ion-list>
+
+    <ion-item >
+      <ion-icon name="md-clipboard" item-start></ion-icon>
+      ประวัติการเจ็บป่วย
+    </ion-item>
     <p>
-      {{ item?.report_locationDetail }}
+      Hx : {{ item?.patient_history }}
+    </p>
+    <ion-item >
+      <ion-icon name="ios-chatbubbles-outline" item-start></ion-icon>
+      ข้อความ
+    </ion-item>
+    <p>
+      Message : {{ item?.messages }}
     </p>
   </ion-list>
 

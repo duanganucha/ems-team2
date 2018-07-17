@@ -3,7 +3,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { DispatchClass } from '../../app/interface';
 import { AngularFireDatabase } from 'angularfire2/database';
-import { ListPage } from '../list/list';
+import { Camera, CameraOptions } from '@ionic-native/camera';
+import { DetailPage } from '../detail/detail';
 
 /**
  * Generated class for the VitalsignPage page.
@@ -20,20 +21,25 @@ import { ListPage } from '../list/list';
 export class VitalsignPage {
   segment ;
   item : DispatchClass;
-  // private todo : FormGroup;
+  
+  base64Image: string = 'assets/imgs/camera.jpg';
+  imageDisplay: string;
+
   private formVitalSign : FormGroup;
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams, 
     private builder: FormBuilder,
-    private afDB: AngularFireDatabase
+    private afDB: AngularFireDatabase,
+    private camera: Camera,
+
 
   ) {
 
     this.segment = 'first';
 
     this.item = this.navParams.get('item');
-    console.log(this.item)
+    console.log(this.item.key)
 
     this.formVitalSign = this.builder.group({
       vitalsign1_GSC : [this.item.vitalsign1_GSC],
@@ -54,13 +60,6 @@ export class VitalsignPage {
       vitalsign2_symptom_second : [this.item.vitalsign2_symptom_second],
       vitalsign2_DTX : [this.item.vitalsign2_DTX]
     })
-
-    // this.todo = this.builder.group({
-    //   title: ['', Validators.required],
-    //   description: [''],
-    //   mapStyle : '',
-    //   notify : ''
-    // });
   }
 
   onSendVitalSign(){
@@ -70,17 +69,38 @@ export class VitalsignPage {
     itemsRef.update( this.item.key , this.formVitalSign.value );
 
 
-    this.navCtrl.setRoot(ListPage);
   }
   segmentChanged(event){
     console.log(event)
     console.log(this.segment)
   }
 
+  onUploadImage(){
+    const itemsRef = this.afDB.list('requests');
+    itemsRef.update( this.item.key , { patient_image_ByTeam : this.base64Image } );
+  }
 
-  // logForm(){
-  //   console.log(this.todo.value)
-  // }
+  OnTakePhoto() {
 
+    const options: CameraOptions = {
+      quality: 30,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      correctOrientation: true
+    }
+
+    this.camera.getPicture(options).then((imageData) => {
+      console.log(imageData)
+
+      this.base64Image = 'data:image/jpeg;base64,' + imageData;
+      this.item.report_image = this.base64Image;
+      console.log(this.base64Image)
+
+      this.imageDisplay = this.base64Image;
+    }, (err) => {
+      // Handle error
+    });
+  }
 
 }

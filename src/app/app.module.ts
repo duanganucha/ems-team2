@@ -26,6 +26,8 @@ import { VitalsignPage } from '../pages/vitalsign/vitalsign';
 import { ReactiveFormsModule } from '@angular/forms';
 import { IonicStorageModule } from '@ionic/storage';
 import { StatusPage } from '../pages/status/status';
+import { ReversePipe } from '../pipes/reverse/reverse';
+import { Camera } from '@ionic-native/camera';
 
 
 @NgModule({
@@ -36,7 +38,8 @@ import { StatusPage } from '../pages/status/status';
     DetailPage,
     MapPage,
     VitalsignPage,
-    StatusPage
+    StatusPage,
+    ReversePipe
   ],
   imports: [
     BrowserModule,ReactiveFormsModule,
@@ -63,7 +66,7 @@ import { StatusPage } from '../pages/status/status';
     StatusBar,
     SplashScreen,
     CallNumber,
-    Geolocation,
+    Geolocation,Camera,
     LaunchNavigator,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]

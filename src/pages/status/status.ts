@@ -4,6 +4,7 @@ import { DispatchClass } from '../../app/interface';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { MapPage } from '../map/map';
 import { VitalsignPage } from '../vitalsign/vitalsign';
+import { FormBuilder, FormGroup } from '../../../node_modules/@angular/forms';
 
 /**
  * Generated class for the StatusPage page.
@@ -20,22 +21,35 @@ import { VitalsignPage } from '../vitalsign/vitalsign';
 export class StatusPage {
   item: DispatchClass;
 
+  michiganForm : FormGroup;
+  
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
-    private afDB: AngularFireDatabase
+    private afDB: AngularFireDatabase,
+    private builder : FormBuilder
   ) {
 
     this.item = this.navParams.get('item');
     console.log(this.item)
+
+    this.michiganForm = this.builder.group({
+      km_start : [this.item.km_start],
+      km_depart :[this.item.km_depart],
+      km_hospital : [this.item.km_hospital],
+      km_end : [this.item.km_end]
+    })
+
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad StatusPage');
+  onSendMichigan(){
+    const itemsRef = this.afDB.list('requests')
+    itemsRef.update( this.item.key , this.michiganForm.value );
   }
 
 
   time_depart: boolean
   time_departUpdate(event) {
+    console.log(event)
     this.time_depart = event;
     var date = Date.now();
     const itemsRef = this.afDB.list('requests')

@@ -11,7 +11,7 @@
 <ion-content >
 
   <ion-list>
-      <ion-item  *ngFor="let item of items | async"  (click)="onDetailView(item)">
+      <ion-item  *ngFor="let item of items | async | reverse "  (click)="onDetailView(item)">
         <ion-thumbnail item-start>
             <img src="{{item.report_image}}">
           </ion-thumbnail>

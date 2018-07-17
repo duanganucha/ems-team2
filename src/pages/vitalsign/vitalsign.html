@@ -2,7 +2,14 @@
 <ion-header>
 
   <ion-navbar color="danger">
-    <ion-title>Vital Sign</ion-title>
+    <ion-title>Vital Sign / Image </ion-title>
+
+    <ion-buttons end>
+      <button ion-button icon-only (click)="OnTakePhoto()">
+        <ion-icon name="ios-camera"></ion-icon>
+      </button>
+    </ion-buttons>
+
   </ion-navbar>
 
 </ion-header>
@@ -164,6 +171,21 @@
       <button ion-button type="submit" round>ส่งข้อมูล</button>
     </ion-list>
     <!-- -----------Form2---END------------ -->
+
+     <!-- -------------Camera Photo------------------- -->
+
+  <ion-list>
+    <img [src]="base64Image" (click)="OnTakePhoto()" class="center">
+    <button ion-button *ngIf="base64Image == 'assets/imgs/camera.png'" icon-left block outline small type="button" (click)="OnTakePhoto()">
+    </button>
+    <button ion-button (click)="onUploadImage()" round>ส่งภาพ</button>
+  </ion-list>
+
+<ion-list>
+  <img src="{{ item?.patient_image_ByTeam }}">
+</ion-list>
+
+
   </form>
 
 

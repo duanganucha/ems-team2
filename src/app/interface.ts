@@ -36,7 +36,8 @@ export class DispatchClass {
           public patient_HN: string,
           public patient_ID: string,
           public patient_image_ByTeam: string,
-      
+          public patient_history: string,
+
           public vitalsign1_symptom_first: string,
           public vitalsign1_GSC: string,
           public vitalsign1_pupil: string,
@@ -74,6 +75,7 @@ export class DispatchClass {
           
           public treatment: string,
           public diagnosis: string,
+          public history_illness: string,
       
           public member_doctor: string,
           public member_one: string,

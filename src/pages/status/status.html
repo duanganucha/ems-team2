@@ -23,30 +23,76 @@
 <ion-content style="background-color: rgb(240, 240, 240)">
   <ion-card>
     <ion-item>
-      <ion-label>ออกจากฐาน : <p align="right">{{ item?.time_depart | date: ' HH:mm - dd/MM/yyyy' }}</p></ion-label>
+      <ion-label>ออกจากฐาน :
+        <p align="right">{{ item?.time_depart | date: ' HH:mm - dd/MM/yy' }}</p>
+      </ion-label>
       <ion-toggle [(ngModel)]="time_depart" (ngModelChange)="time_departUpdate($event)"></ion-toggle>
     </ion-item>
 
     <ion-item>
-      <ion-label>ถึงที่เกิดเหตุ : <p align="right">{{ item?.time_arrive_scene | date: ' HH:mm - dd/MM/yyyy' }}</p></ion-label>
+      <ion-label>ถึงที่เกิดเหตุ :
+        <p align="right">{{ item?.time_arrive_scene | date: ' HH:mm - dd/MM/yy' }}</p>
+      </ion-label>
       <ion-toggle [(ngModel)]="time_arrive_scene" (ngModelChange)="time_arrive_sceneUpdate($event)"></ion-toggle>
     </ion-item>
 
     <ion-item>
-      <ion-label>นำส่ง/ออกจากจุด :<p align="right"> {{ item?.time_leave_scene | date: ' HH:mm - dd/MM/yyyy' }}</p></ion-label>
+      <ion-label>นำส่ง/ออกจากจุด :
+        <p align="right"> {{ item?.time_leave_scene | date: ' HH:mm - dd/MM/yy' }}</p>
+      </ion-label>
       <ion-toggle [(ngModel)]="time_leave_scene" (ngModelChange)="time_leave_sceneUpdate($event)"></ion-toggle>
     </ion-item>
 
     <ion-item>
-      <ion-label>ถึง รพ. :<p align="right">  {{ item?.time_arrive_hospital | date: ' HH:mm - dd/MM/yyyy' }}</p> </ion-label>
+      <ion-label>ถึง รพ. :
+        <p align="right"> {{ item?.time_arrive_hospital | date: ' HH:mm - dd/MM/yy' }}</p>
+      </ion-label>
       <ion-toggle [(ngModel)]="time_arrive_hospital" (ngModelChange)="time_arrive_hospitalUpdate($event)"></ion-toggle>
     </ion-item>
 
     <ion-item>
-      <ion-label>กลับถึงฐาน : <p align="right"> {{ item?.time_arrive_end | date: ' HH:mm - dd/MM/yyyy' }}</p></ion-label>
+      <ion-label>กลับถึงฐาน :
+        <p align="right"> {{ item?.time_arrive_end | date: ' HH:mm - dd/MM/yy' }}</p>
+      </ion-label>
       <ion-toggle [(ngModel)]="time_arrive_end" (ngModelChange)="time_arrive_endUpdate($event)"></ion-toggle>
     </ion-item>
   </ion-card>
+
+  <form [formGroup]="michiganForm" (ngSubmit)="onSendMichigan()">
+    <ion-list>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label color="primary" stacked>ออกจากฐาน </ion-label>
+              <ion-input type="number" formControlName="km_start" placeholder="-"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label color="primary" stacked>ถึงที่เกิดเหตุ</ion-label>
+              <ion-input type="number" formControlName="km_depart" placeholder="-"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label color="primary" stacked>ถึง รพ.</ion-label>
+              <ion-input type="number" formControlName="km_hospital" placeholder="-"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label color="primary" stacked>กลับถึงฐาน</ion-label>
+              <ion-input type="number" formControlName="km_end" placeholder="-"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <button ion-button type="submit" round>ส่งข้อมูล</button>
+      </ion-grid>
+    </ion-list>
+  </form>
 
   <ion-fab right bottom>
     <button ion-fab color="secondary" (click)="openMap()">
